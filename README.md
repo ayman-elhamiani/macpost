@@ -1,1 +1,2 @@
 # macpost
+new macpost
