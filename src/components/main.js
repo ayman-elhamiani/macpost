@@ -12,20 +12,26 @@ class Main extends Component{
           <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '500px' }}>
             <div className="content mr-auto ml-auto">
                 
-                 <form action="">
-                    <div className="form-group mrsm-2">
-                        {/* //✍🏻📄📑🗒📃📜📋📖🔖📝 */}
-                    <input type="text" id="postContent" placeholder="✍🏻 - post here 📝 " className="form-control" required></input>
+                 <form onSubmit={(event) => {
+                     event.preventDefault()
+                     const content = this.postContent.value
+                     this.props.createPost(content)
+                 }}>
+                    <div className="form-group mr-sm-2">
+                    <input  type="text" 
+                            ref={(input) => { this.postContent = input }}
+                            id="postContent" 
+                            placeholder="✍🏻 - post here 📝 "
+                            className="form-control" 
+                            required />
                     </div>
-                    <button type="submit" form="form1" value="Submit" className="btn btn-primary btn-block">Submit</button>
+                    <button type="submit"  value="submit" className="btn btn-primary btn-block">Submit</button>
 
                 </form>
-                            { this.props.posts.map((post, key)=>{
-
+                { this.props.posts.map((post, key)=>{
                   return (
-
-                    <div class="card mb-4" key={key}>
-                      <div class="card-header">
+                    <div className="card mb-4" key={key}>
+                      <div className="card-header">
                       <img
                         className='mr-2'
                         width='30'
