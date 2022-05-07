@@ -48,8 +48,9 @@ class App extends Component {
             posts: [...this.state.posts, post]
           })          
         }
-        console.log({posts: this.state.posts })
+        this.setState({loading: false})
        }
+       
        else{
          window.alert("contract  not deployed")
        }
@@ -64,7 +65,8 @@ class App extends Component {
             account : '',
             socialNetwork: null,
             posts: [],
-            postCount: 0
+            postCount: 0,
+            loading: true
         }
     }
 
@@ -73,46 +75,11 @@ class App extends Component {
     return (
       <div>
         <Navbar account = {this.state.account}/>
-        <div className="container-fluid mt-5">
-        <div className="row">
-          <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '500px' }}>
-            <div className="content mr-auto ml-auto">
-              { this.state.posts.map((post, key)=>{
-
-                  return (
-
-                    <div class="card mb-4" key={key}>
-                      <div class="card-header">
-                      <img
-                        className='mr-2'
-                        width='30'
-                        height='30'
-                        src={`data:image/png;base64,${new Identicon(this.state.account, 30).toString()}`}
-                      />
-                          <small className='text-muted'>{post.author}</small>
-                        </div>
-                        <ul id='postList' className='list-group list-group-flush'>
-                          <li className='list-group-item'>
-                            <p>{post.content}</p>
-                          </li>
-                          <li key={key} className="list-group-item py-2">
-                            <small className="float-left mt-1 text-muted">
-                              TIPS: {window.web3.utils.fromWei(post.tipAmount.toString(), 'Ether')} ETH
-                            </small>
-                            <button className="btn btn-link btn-sm float-right pt-0" name={post.id}>
-                              <span>TIP 0.1 ETH</span> 
-                            </button>
-                          </li>
-                          
-                        </ul>
-                    </div>
-                  ); 
-                })
-              }
-            </div>
-          </main>
-        </div>
-        </div>
+        {
+          this.state.loading
+          ?  <div id='loader' className='text-center mt-5'><p>loading</p></div>
+          :<Main posts = {this.state.posts}/>
+        } 
           
       </div>
     );
