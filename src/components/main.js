@@ -11,7 +11,16 @@ class Main extends Component{
         <div className="row">
           <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '500px' }}>
             <div className="content mr-auto ml-auto">
-              { this.props.posts.map((post, key)=>{
+                
+                 <form action="">
+                    <div className="form-group mrsm-2">
+                        {/* //✍🏻📄📑🗒📃📜📋📖🔖📝 */}
+                    <input type="text" id="postContent" placeholder="✍🏻 - post here 📝 " className="form-control" required></input>
+                    </div>
+                    <button type="submit" form="form1" value="Submit" className="btn btn-primary btn-block">Submit</button>
+
+                </form>
+                            { this.props.posts.map((post, key)=>{
 
                   return (
 
